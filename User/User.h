@@ -1,4 +1,3 @@
-
 #ifndef USER_H
 #define USER_H
 
@@ -8,12 +7,9 @@
 class User
 {
 public:
-   
     User();
-   
-    User(int userID, const std::string &username, const std::string &password);
+    User(const int &userID, const std::string &username, const std::string &password);
 
-  
     bool authenticate(const std::string &password) const;
     const std::string &getUsername() const;
     int getUserID() const;
@@ -23,16 +19,11 @@ public:
     void setCurrentLocation(const Location &location);
 
 private:
-   
-    int userID;                   
-    std::string username;         
-    std::string passwordHash;     
-    int currentTripID;             
-    Location currentLocation;      
-
-  
-    void setPassword(const std::string &password); 
-    std::string hashPassword(const std::string &password) const; 
+    int userID;
+    std::string username;
+    std::string password;
+    int currentTripID; 
+    Location currentLocation;
 };
 
-#endif 
+#endif
