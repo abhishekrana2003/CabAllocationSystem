@@ -1,58 +1,60 @@
+// EmployeeCabSearch.cpp
 #include "CabSearch.h"
 #include <cmath>
-#include <queue>
-#include <vector>
+#include <algorithm>
 
 EmployeeCabSearch::EmployeeCabSearch(const Location &empLoc, CabAllocationSystem &cabAllocSys)
     : employeeLocation(empLoc), cabAllocationSystem(cabAllocSys) {}
 
-
 double EmployeeCabSearch::calculateDistance(const Location &loc1, const Location &loc2) const
 {
+    
     double lat1 = loc1.getLatitude();
     double lon1 = loc1.getLongitude();
     double lat2 = loc2.getLatitude();
     double lon2 = loc2.getLongitude();
 
-  
-    return std::sqrt((lat2 - lat1) * (lat2 - lat1) + (lon2 - lon1) * (lon2 - lon1));
+    
+    double distance = std::sqrt((lat2 - lat1) * (lat2 - lat1) + (lon2 - lon1) * (lon2 - lon1));
+
+    return distance;
 }
 
 
 std::vector<Cab>& EmployeeCabSearch::getAllCabs()
 {
-    return cabAllocationSystem.getAllCabs();
+    std::vector<Cab> &allCabs = cabAllocationSystem.getAllCabs();
+    return allCabs;
 }
+
 
 std::vector<Cab> EmployeeCabSearch::suggestNearbyCabs()
 {
+    
+    std::vector<Cab> &allCabs = cabAllocationSystem.getAllCabs();
+
     std::vector<Cab> nearbyCabs;
-   
-    std::priority_queue<std::pair<double, Cab>, std::vector<std::pair<double, Cab>>, std::greater<>> cabQueue;
 
-
-    const double thresholdDistance = 100.0;
-
-    for (const auto &cab : getAllCabs())
+    for (const auto &cab : allCabs)
     {
-       
-        if (!cab.isCabFree()) {
+        
+        if (cab.isCabFree() == false)
+        {
             continue;
         }
 
         double distance = calculateDistance(employeeLocation, cab.getCurrentLocation());
 
-        if (distance < thresholdDistance) {
-            cabQueue.push({distance, cab});
+        
+        if (distance < 100.0)
+        {
+            nearbyCabs.push_back(cab);
         }
     }
 
-    
-    while (!cabQueue.empty())
-    {
-        nearbyCabs.push_back(cabQueue.top().second);
-        cabQueue.pop();
-    }
+    sort(nearbyCabs.begin(), nearbyCabs.end(), [this](const Cab &cab1, const Cab &cab2)
+         { return calculateDistance(employeeLocation, cab1.getCurrentLocation()) < calculateDistance(employeeLocation, cab2.getCurrentLocation()); });
 
+   
     return nearbyCabs;
 }

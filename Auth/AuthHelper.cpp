@@ -21,3 +21,5 @@ int AuthenticationHelper::performAuthentication(AuthSystem &authSystem)
         return -1;
     }
 }
+
+

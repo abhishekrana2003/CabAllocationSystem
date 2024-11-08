@@ -1,5 +1,5 @@
-#ifndef CONSOLE_UI_H
-#define CONSOLE_UI_H
+#ifndef UI_H
+#define UI_H
 
 #include "./../CabAllocationSystem/CabAllocationSystem.h"
 #include "./../User/User.h"
@@ -8,20 +8,13 @@ class ConsoleUI
 {
 private:
     CabAllocationSystem &cabAllocationSystem;
-    User &currentUser;
-
- 
-    void displayMenu() const;
-    void displayCabs(const std::vector<Cab> &cabs) const;
-    void displayUserInfo() const;
-    void requestCab();
-    void completeTrip();
+    User currentUser;
 
 public:
     ConsoleUI(CabAllocationSystem &cabAllocSys, User &currentUser);
 
-   
-    void processUserInput();
+    void displayMenu();
+    void processUserInput(CabAllocationSystem &cabAllocSys, User &currentUser);
 };
 
 #endif

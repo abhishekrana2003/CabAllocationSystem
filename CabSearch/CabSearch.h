@@ -1,5 +1,6 @@
-#ifndef EMPLOYEE_CAB_SEARCH_H
-#define EMPLOYEE_CAB_SEARCH_H
+
+#ifndef CAB_SEARCH_H
+#define CAB_SEARCH_H
 
 #include "./../Location/Location.h"
 #include "./../Cab/Cab.h"
