@@ -35,7 +35,7 @@ The **Smart Cab Allocation System** is designed to optimize cab allocation based
 
 - **Authentication**: Secure access via username and password authentication.
 - **Cab Allocation Algorithm**:
-  - **Time Complexity**: \( O(n) \) where \( n \) is the number of cabs.
+  - **Time Complexity**: \( O(nlog(n)) \) where \( n \) is the number of cabs.
   - **Space Complexity**: \( O(n) \), for storing cab location data.
 - **OOP Design**:
   - **Encapsulation**: Data and methods encapsulated within classes.
